@@ -1,46 +1,103 @@
-<!doctype html>
-<html class="no-js" lang="">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Haq Nawaz</title>
-  <meta name="description" content="Staff Data Engineer at Carta. Previously, technical co-founder of Resonate Recordings.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-
-  <link href="tufte/tufte.min.css" rel="stylesheet">
-
-  <meta name="theme-color" content="#000000">
+  <title>BI Insights page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/style.min.css">
 </head>
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="100">
+  <header id="header-section">
+    <nav class="navbar navbar-expand-lg pl-3 pl-sm-0" id="navbar">
+    <div class="container">
+      <div class="navbar-brand-wrapper d-flex w-100">
+         <a class="navbar-brand" href="{{ url_for('home')}}">BI Insights Inc</a>
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="mdi mdi-menu navbar-toggler-icon"></span>
+        </button> 
+      </div>
+      <div class="collapse navbar-collapse navbar-menu-wrapper" id="navbarSupportedContent">
+        <ul class="navbar-nav align-items-lg-center align-items-start ml-auto">
+          <li class="d-flex align-items-center justify-content-between pl-4 pl-lg-0">
+            <div class="navbar-collapse-logo">
+              <img src="images/Group2.svg" alt="">
+            </div>
+            <button class="navbar-toggler close-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="mdi mdi-close navbar-toggler-icon pl-5"></span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#header-section">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#features-section">About</a>
+          </li>
 
-<body>
-    <article>
-        <section>
-            <h1>👀</h1>
-            <p>
-                This website<label for="sn-source-code" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-source-code" class="margin-toggle"/><span class="sidenote"><a href="https://github.com/hnawaz007/biinsightsinc">Source code</a></span>
-                <label for="sn-11ty" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-11ty" class="margin-toggle"/><span class="sidenote">Made with <a href="https://www.11ty.dev">11ty</a>, <a href="https://edwardtufte.github.io/tufte-css/">Tufte CSS</a>, and hosted by <a href="https://netlify.com">Netlify</a></span>
-
-                I am a BI Developer and a Data Engineer.  I am currently working on AWS Cloud and BI iniatives. I blog at <a href="https://medium.com/@hnawaz100"> and vlog at <a href="https://www.youtube.com/channel/UC8aox1k3cd00tTKuBNt4tMw">YouTube on various Data and Analytics topics.</a>.
-
-                I created few open source projects &mdash;
-                <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/ETL%20Pipeline">ETL Pipeline</a> and
-                <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/AutomateExcelReports">Automate Excel Reports</a> and
-                <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/ML">Machine Learning</a>.
-
-                Follow me on
+        </ul>
+      </div>
+    </div> 
+    </nav>   
+  </header>
+  <div class="banner" >
+    <div class="container">
+      <h1 class="font-weight-semibold">Data Analytics.</h1>
+      <h6 class="font-weight-normal text-muted pb-3">This is site showcases the project(s) and Data Anlytics topics covered by BI Insigts Inc.</h6>
+	  <p>
+	  Follow me on
                 <a href="https://github.com/hnawaz007">GitHub</a>,
                 <a href="https://www.instagram.com/bi_insights_inc/">Instagram</a>,
                 <a href="https://www.youtube.com/channel/UC8aox1k3cd00tTKuBNt4tMw">YouTube</a>,
                 <a href="https://medium.com/@hnawaz100">Medium</a>,
                 and <a href="https://www.linkedin.com/in/haq-nawaz/">LinkedIn</a>.
-            </p>
-        </section>
-    </article>
-</body>
+	</p>
 
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <div class="container">
+      <section class="features-overview" id="features-section" >
+        <div class="content-header">
+          <h2>BI Insights Inc</h2>
+          <h6 class="section-subtitle text-muted">Start your Data and Analytics journey with <a href="https://www.youtube.com/channel/UC8aox1k3cd00tTKuBNt4tMw">BI Insights Inc.</h6>
+        </div>
+        <div class="d-md-flex justify-content-between">
+          <div class="grid-margin d-flex justify-content-start">
+            <div class="features-width">
+              <img src="images/Group12.svg" alt="" class="img-icons">
+			  <h5 class="py-3">ETL Pipeline</h5>
+			   <p class="text-muted">Develop Data Integration Pipelines with Python</p>
+              <a href="href="https://github.com/hnawaz007/pythondataanalysis/tree/main/ETL%20Pipeline"><p class="readmore-link">Repo</p></a>  
+            </div>
+          </div>
+          <div class="grid-margin d-flex justify-content-center">
+            <div class="features-width">
+              <img src="images/Group7.svg" alt="" class="img-icons">
+              <h5 class="py-3">Automate Excel</h5>
+              <p class="text-muted">Automate your Excel reports with Python</p>
+              <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/AutomateExcelReports"><p class="readmore-link">Repo</p></a>
+            </div>
+          </div>
+          <div class="grid-margin d-flex justify-content-end">
+            <div class="features-width">
+              <img src="images/Group5.svg" alt="" class="img-icons">
+              <h5 class="py-3">Machine Learning</h5>
+              <p class="text-muted">Machine Learning algorithms; Classification, Regression ...</p>
+              <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/ML"><p class="readmore-link">Repo</p></a>
+            </div>
+          </div>
+        </div>
+      </section>     
+
+
+      <footer class="border-top">
+        <p class="text-center text-muted pt-4">Copyright © 2019<a href="https://hnawaz007.github.io/" class="px-1">BI Insights Inc.</a>All rights reserved.</p>
+      </footer>
+      <!-- Modal for Contact - us Button -->
+
+    </div> 
+  </div>
+
+
+</body>
 </html>
