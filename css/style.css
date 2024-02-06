@@ -9591,12 +9591,12 @@ body.sidebar-open::before {
 }
 
 .features-overview .features-width {
-  flex-basis: 61%;
+  flex-basis: 33.99%;
 }
 
 @media (max-width: 767px) {
   .features-overview .features-width {
-    flex-basis: 100%;
+    flex-basis: 50%;
   }
 }
 
