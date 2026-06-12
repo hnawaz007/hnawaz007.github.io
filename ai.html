@@ -1,254 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="css/style.min.css">
-    <title>Artificial Intelligence Video Content Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artificial Intelligence — BI Insights Inc</title>
+  <style>
+    :root {
+      --bg:#0d1117;--card-bg:#1c2333;--card-border:#2d3748;--accent:#4f6ef7;
+      --text:#e2e8f0;--text-muted:#8892a4;--thumb-bg:#0a0f1a;
+      --btn-watch-bg:#4f6ef7;--btn-code-bg:#1e2a3a;--btn-code-fg:#7dd3fc;--btn-code-bd:#2d4a6a;
+      --radius:12px;--shadow:0 4px 24px rgba(0,0,0,0.4);--shadow-hover:0 12px 40px rgba(0,0,0,0.6);
+      --font:'Segoe UI',system-ui,-apple-system,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .nav{position:sticky;top:0;z-index:100;background:rgba(13,17,23,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border)}
+    .nav-inner{max-width:1280px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+    .nav-brand{font-size:1.1rem;font-weight:700;letter-spacing:.02em}
+    .nav-brand span{color:var(--accent)}
+    .nav-back{display:inline-flex;align-items:center;gap:6px;color:var(--text-muted);font-size:.875rem;font-weight:500;transition:color .2s}
+    .nav-back:hover{color:var(--text)}
+    .page-header{max-width:1280px;margin:0 auto;padding:56px 24px 40px}
+    .page-header h1{font-size:clamp(1.6rem,4vw,2.5rem);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+    .page-header h1 span{color:var(--accent)}
+    .page-header p{font-size:1rem;color:var(--text-muted);max-width:600px;margin-bottom:20px}
+    .playlist-link{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border-radius:8px;font-size:.875rem;font-weight:600;background:var(--btn-watch-bg);color:#fff;transition:opacity .15s,transform .15s}
+    .playlist-link:hover{opacity:.85;transform:translateY(-1px)}
+    .grid-wrap{max-width:1280px;margin:0 auto;padding:0 24px 72px}
+    .video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    @media(max-width:960px){.video-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.video-grid{grid-template-columns:1fr;gap:16px}.page-header{padding:36px 16px 28px}.grid-wrap{padding:0 16px 48px}.nav-inner{padding:0 16px}}
+    .card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+    .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:var(--accent)}
+    .card-thumb{position:relative;width:100%;aspect-ratio:16/9;background:var(--thumb-bg);overflow:hidden;display:block}
+    .card-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
+    .card:hover .card-thumb img{transform:scale(1.04)}
+    .play-badge{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);opacity:0;transition:opacity .2s}
+    .card:hover .play-badge{opacity:1}
+    .play-badge svg{width:52px;height:52px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.6))}
+    .card-body{padding:16px 16px 0;flex:1;display:flex;flex-direction:column}
+    .card-title{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:8px}
+    .card-desc{font-size:.82rem;color:var(--text-muted);line-height:1.5;flex:1}
+    .card-actions{padding:12px 16px 16px;display:flex;flex-wrap:wrap;gap:7px}
+    .btn{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:6px;font-size:.78rem;font-weight:600;border:1px solid transparent;transition:opacity .15s,transform .15s;white-space:nowrap}
+    .btn:hover{opacity:.82;transform:translateY(-1px)}
+    .btn-watch{background:var(--btn-watch-bg);color:#fff;border-color:var(--btn-watch-bg)}
+    .btn-code{background:var(--btn-code-bg);color:var(--btn-code-fg);border-color:var(--btn-code-bd)}
+    .footer{text-align:center;padding:32px 24px;border-top:1px solid var(--card-border);color:var(--text-muted);font-size:.82rem}
+    .footer a{color:var(--accent)}
+
+    .thumb-ph{background:linear-gradient(135deg,#1a2540 0%,#0d1117 100%);}
+    .thumb-ph::after{content:'\25B6';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2rem;color:var(--accent);opacity:.35;}
+  </style>
 </head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">BI <span>Insights</span> Inc</a>
+      <a href="index.html" class="nav-back">← All Topics</a>
+    </div>
+  </nav>
+  <div class="page-header">
+    <h1>Artificial <span>Intelligence</span></h1>
+    <p>Run LLMs locally, build RAG apps, AI agents, and integrate AI into your data workflows.</p>
+    <a href="https://www.youtube.com/playlist?list=PLaz3Ms051BAlZHfWsl2P9A3p0YYPuth7-" target="_blank" class="playlist-link">▶ View Full Playlist</a>
+  </div>
+  <div class="grid-wrap">
+    <div class="video-grid">
 
-<body id="body" data-spy="scroll" data-target=".navbar" data-offset="100">
-  <header id="header-section">
-    <nav class="navbar navbar-expand-lg pl-3 pl-sm-0" id="navbar">
-    <div class="container">
-      <div class="navbar-brand-wrapper d-flex w-100">
-         <a class="navbar-brand" href="index.html">BI Insights Inc</a>
-        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="mdi mdi-menu navbar-toggler-icon"></span>
-        </button> 
-      </div>
-      <div class="collapse navbar-collapse navbar-menu-wrapper" id="navbarSupportedContent">
-        <ul class="navbar-nav align-items-lg-center align-items-start ml-auto">
-          <li class="d-flex align-items-center justify-content-between pl-4 pl-lg-0">
-            <div class="navbar-collapse-logo">
-              <img src="images/Group2.svg" alt="">
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=yTa1sPrfTDc&list=PLaz3Ms051BAlZHfWsl2P9A3p0YYPuth7-&index=2" target="_blank" class="card-thumb" aria-label="Watch: How to build your own private ChatGPT?">
+              <img crossorigin="anonymous" data-vid="yTa1sPrfTDc" src="" alt="How to build your own private ChatGPT?" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">How to build your own private ChatGPT?</h2>
+              <p class="card-desc">Run Large Language Model (LLM) | GPT4ALL | Local Private Chatbot</p>
             </div>
-            <button class="navbar-toggler close-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="mdi mdi-close navbar-toggler-icon pl-5"></span>
-            </button>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#header-section">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#features-section">About</a>
-          </li>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=yTa1sPrfTDc&list=PLaz3Ms051BAlZHfWsl2P9A3p0YYPuth7-&index=2" target="_blank" class="btn btn-watch">▶ Watch</a><a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/gpt4all" target="_blank" class="btn btn-code">{} Code</a>
+            </div>
+          </article>
 
-        </ul>
-      </div>
-	  
-    </div> 
-    </nav>   
-  </header>
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=lvTUZ9bL04s&list=PLaz3Ms051BAlZHfWsl2P9A3p0YYPuth7-&index=1" target="_blank" class="card-thumb" aria-label="Watch: How to develop a Local ChatGPT with your OWN document?">
+              <img crossorigin="anonymous" data-vid="lvTUZ9bL04s" src="" alt="How to develop a Local ChatGPT with your OWN document?" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">How to develop a Local ChatGPT with your OWN document?</h2>
+              <p class="card-desc">Chat with PDF, TXT and CSV File | Quick Setup Guide | Python</p>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=lvTUZ9bL04s&list=PLaz3Ms051BAlZHfWsl2P9A3p0YYPuth7-&index=1" target="_blank" class="btn btn-watch">▶ Watch</a><a href="https://gpt4all.io/index.html" target="_blank" class="btn btn-code">{} Code</a>
+            </div>
+          </article>
 
-<!---------------->
-  <div class="content-wrapper">
-    <div class="container">
-	
-<!---------------->
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=CE9umy2NlhE" target="_blank" class="card-thumb" aria-label="Watch: How to run Large Language Models locally? Integrate LLM in your App">
+              <img crossorigin="anonymous" data-vid="CE9umy2NlhE" src="" alt="How to run Large Language Models locally? Integrate LLM in your App" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">How to run Large Language Models locally? Integrate LLM in your App</h2>
+              <p class="card-desc">Integrate LLM in your APP | Build with LLM | Ollama | Setup Guide | Python</p>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=CE9umy2NlhE" target="_blank" class="btn btn-watch">▶ Watch</a><a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/StreamlitLLMChat" target="_blank" class="btn btn-code">{} Code</a>
+            </div>
+          </article>
 
-  
-  <section class="features-overview" id="features-section" >
-    <div class="content-header">
-      <a href="https://www.youtube.com/playlist?list=PLaz3Ms051BAlZHfWsl2P9A3p0YYPuth7-" target="_blank">
-        <img src="images/BIInsightsInc-sm-1.com.png" alt="" class="img-icons img-banner">
-        <h6 class="section-subtitle text-muted">Artificial Intelligence playlist  <a href="https://www.youtube.com/playlist?list=PLaz3Ms051BAlZHfWsl2P9A3p0YYPuth7-" target="_blank">BI Insights Inc.</a></h6>
-      </a>
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=YUYZd71hg3w" target="_blank" class="card-thumb" aria-label="Watch: How to build a custom private ChatGPT that produces SQL?">
+              <img crossorigin="anonymous" data-vid="YUYZd71hg3w" src="" alt="How to build a custom private ChatGPT that produces SQL?" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">How to build a custom private ChatGPT that produces SQL?</h2>
+              <p class="card-desc">Custom LLM | Open Source LLM | No Code Solution using OpenWebUI</p>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=YUYZd71hg3w" target="_blank" class="btn btn-watch">▶ Watch</a><a href="https://github.com/open-webui/open-webui" target="_blank" class="btn btn-code">{} Code</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=vCoUZBhYzHA" target="_blank" class="card-thumb" aria-label="Watch: How to integrate Pandas AI with a local LLM using Ollama? Data Analysis using AI">
+              <img crossorigin="anonymous" data-vid="vCoUZBhYzHA" src="" alt="How to integrate Pandas AI with a local LLM using Ollama? Data Analysis using AI" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">How to integrate Pandas AI with a local LLM using Ollama? Data Analysis using AI</h2>
+              <p class="card-desc">Perform data analysis using LLM | Private & Free | Ollama | AI | llama3 | Python</p>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=vCoUZBhYzHA" target="_blank" class="btn btn-watch">▶ Watch</a><a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/PandasAI" target="_blank" class="btn btn-code">{} Code</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=7QI7ZCKvr5w" target="_blank" class="card-thumb" aria-label="Watch: How to integrate NLP & AI with a database? Get insights using NLP">
+              <img crossorigin="anonymous" data-vid="7QI7ZCKvr5w" src="" alt="How to integrate NLP & AI with a database? Get insights using NLP" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">How to integrate NLP & AI with a database? Get insights using NLP</h2>
+              <p class="card-desc">Integrate LLM in your APP | Build with LLM | Ollama | LangChain | Python</p>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=7QI7ZCKvr5w" target="_blank" class="btn btn-watch">▶ Watch</a><a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/NLP%20%26%20AI%20database%20integration" target="_blank" class="btn btn-code">{} Code</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=Ii4ouKEUgz4" target="_blank" class="card-thumb" aria-label="Watch: How to build a RAG app using Ollama and LangChain">
+              <img crossorigin="anonymous" data-vid="Ii4ouKEUgz4" src="" alt="How to build a RAG app using Ollama and LangChain" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">How to build a RAG app using Ollama and LangChain</h2>
+              <p class="card-desc">Unlock the power of AI with a Retrieval-Augmented Generation (RAG) system</p>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=Ii4ouKEUgz4" target="_blank" class="btn btn-watch">▶ Watch</a><a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/RAG%20App" target="_blank" class="btn btn-code">{} Code</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=mqI3So_8S88" target="_blank" class="card-thumb" aria-label="Watch: What is LangChain? Explore LangChain framework with examples">
+              <img crossorigin="anonymous" data-vid="mqI3So_8S88" src="" alt="What is LangChain? Explore LangChain framework with examples" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">What is LangChain? Explore LangChain framework with examples</h2>
+              <p class="card-desc">Learn the basics of LangChain with examples | Ollama | Python</p>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=mqI3So_8S88" target="_blank" class="btn btn-watch">▶ Watch</a><a href="https://github.com/hnawaz007/AI" target="_blank" class="btn btn-code">{} Code</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=Huy-Gn4RtGQ" target="_blank" class="card-thumb" aria-label="Watch: Build an optical character recognition (OCR) system using LLM">
+              <img crossorigin="anonymous" data-vid="Huy-Gn4RtGQ" src="" alt="Build an optical character recognition (OCR) system using LLM" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">Build an optical character recognition (OCR) system using LLM</h2>
+              <p class="card-desc">OCR with Ollama | Vision LLM | Open Source</p>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=Huy-Gn4RtGQ" target="_blank" class="btn btn-watch">▶ Watch</a><a href="https://ollama.com/" target="_blank" class="btn btn-code">{} Code</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=Q8DsK_QNY6g" target="_blank" class="card-thumb" aria-label="Watch: How to create your first AI Agent? Using Anthropic Claude Sonnet">
+              <img crossorigin="anonymous" data-vid="Q8DsK_QNY6g" src="" alt="How to create your first AI Agent? Using Anthropic Claude Sonnet" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">How to create your first AI Agent? Using Anthropic Claude Sonnet</h2>
+              <p class="card-desc">AI Agent | LLM | Anthropic | Claude | LangChain</p>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=Q8DsK_QNY6g" target="_blank" class="btn btn-watch">▶ Watch</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=jWmNgFzYW6g" target="_blank" class="card-thumb" aria-label="Watch: Build a Data Analysis AI Agent with n8n and Docker (Step-by-Step Tutorial)">
+              <img crossorigin="anonymous" data-vid="jWmNgFzYW6g" src="" alt="Build a Data Analysis AI Agent with n8n and Docker (Step-by-Step Tutorial)" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">Build a Data Analysis AI Agent with n8n and Docker (Step-by-Step Tutorial)</h2>
+              <p class="card-desc">Explore n8n, a powerful open-source workflow automation tool</p>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=jWmNgFzYW6g" target="_blank" class="btn btn-watch">▶ Watch</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=qil5iBwd0IA" target="_blank" class="card-thumb" aria-label="Watch: How to build a local AI Agent using n8n and Ollama | Open Source | Self-host n8n">
+              <img crossorigin="anonymous" data-vid="qil5iBwd0IA" src="" alt="How to build a local AI Agent using n8n and Ollama | Open Source | Self-host n8n" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">How to build a local AI Agent using n8n and Ollama | Open Source | Self-host n8n</h2>
+              <p class="card-desc">Explore n8n and Ollama — powerful open-source workflow automation tools</p>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=qil5iBwd0IA" target="_blank" class="btn btn-watch">▶ Watch</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <a href="https://www.youtube.com/watch?v=qcrm1B1Gcn8" target="_blank" class="card-thumb" aria-label="Watch: How to convert speech to text using a local Whisper model?">
+              <img crossorigin="anonymous" data-vid="qcrm1B1Gcn8" src="" alt="How to convert speech to text using a local Whisper model?" loading="lazy">
+              <div class="play-badge">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+                  <polygon points="26,20 48,32 26,44" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <div class="card-body">
+              <h2 class="card-title">How to convert speech to text using a local Whisper model?</h2>
+              <p class="card-desc">Set up and use a local Whisper model for speech-to-text transcription</p>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.youtube.com/watch?v=qcrm1B1Gcn8" target="_blank" class="btn btn-watch">▶ Watch</a>
+            </div>
+          </article>
     </div>
+  </div>
+  <footer class="footer">
+    <p>© 2019 <a href="https://hnawaz007.github.io/">BI Insights Inc.</a> All rights reserved.</p>
+  </footer>
 
-    <!-- Row 1 -->
-    <div class="d-md-flex justify-content-between">
-      <div class="grid-margin d-flex justify-content-start">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=yTa1sPrfTDc&list=PLaz3Ms051BAlZHfWsl2P9A3p0YYPuth7-&index=2" target="_blank">
-            <img src="images/a12.svg" alt="" class="img-icons" height="62px">
-            <h5 class="py-3">How to build your own private chatgpt?</h5>
-            <p class="text-muted">Run Large Language Model (LLM) | GPT4ALL | Local Private Chatbot</p>
-            <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/gpt4all" target="_blank"><p class="readmore-link">Repo</p></a>
-          </a>
-        </div>
-      </div>
-
-      <div class="grid-margin d-flex justify-content-center">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=lvTUZ9bL04s&list=PLaz3Ms051BAlZHfWsl2P9A3p0YYPuth7-&index=1" target="_blank">
-            <img src="images/chat.svg" alt="" class="img-icons" height="62px">
-            <h5 class="py-3">How to develop a Local ChatGPT with your OWN document?</h5>
-            <p class="text-muted">Chat with PDF, TXT and CSV File | Quick Setup Guide | Python</p>
-            <a href="https://gpt4all.io/index.html" target="_blank"><p class="readmore-link">gpt4all</p></a>
-          </a>
-        </div>
-      </div>
-
-      <div class="grid-margin d-flex justify-content-end">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=yTa1sPrfTDc&list=PLaz3Ms051BAlZHfWsl2P9A3p0YYPuth7-&index=2" target="_blank">
-            <img src="images/programming.png" alt="" class="img-icons" height="62px">
-            <h5 class="py-3">How to build your own private chatgpt?</h5>
-            <p class="text-muted">Run Large Language Model (LLM) | GPT4ALL | Local Private Chatbot</p>
-            <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/gpt4all" target="_blank"><p class="readmore-link">Repo</p></a>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Row 2 -->
-    <div class="d-md-flex justify-content-between">
-      <div class="grid-margin d-flex justify-content-start">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=lvTUZ9bL04s&list=PLaz3Ms051BAlZHfWsl2P9A3p0YYPuth7-&index=1" target="_blank">
-            <img src="images/docsai.png" alt="" class="img-icons" height="62px">
-            <h5 class="py-3">How to develop a Local ChatGPT with your OWN document?</h5>
-            <p class="text-muted">Chat with PDF, TXT and CSV File | Quick Setup Guide | Python</p>
-            <a href="https://gpt4all.io/index.html" target="_blank"><p class="readmore-link">gpt4all</p></a>
-          </a>
-        </div>
-      </div>
-
-      <div class="grid-margin d-flex justify-content-center">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=CE9umy2NlhE" target="_blank">
-            <img src="images/integration.png" alt="" class="img-icons" height="62px">
-            <h5 class="py-3">How to run Large Language models Locally? | Integrate LLM in your APP</h5>
-            <p class="text-muted">Integrate LLM in your APP | Build with LLM | Ollama | Setup Guide | Python</p>
-            <a href="https://ollama.com/" target="_blank"><p class="readmore-link">Ollama</p></a>
-            <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/StreamlitLLMChat" target="_blank"><p class="readmore-link">Repo</p></a>
-          </a>
-        </div>
-      </div>
-
-      <div class="grid-margin d-flex justify-content-end">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=YUYZd71hg3w&t" target="_blank">
-            <img src="images/openwebui.png" alt="" class="img-icons" height="62px">
-            <h5 class="py-3">How to build custom private chatgpt that produces SQL?</h5>
-            <p class="text-muted">Custom LLM | Open Source LLM | No Code Solution using OpenWebUI</p>
-            <a href="https://openwebui.com/" target="_blank"><p class="readmore-link">Openwebui</p></a>
-            <a href="https://github.com/open-webui/open-webui" target="_blank"><p class="readmore-link">Repo</p></a>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Row 3 -->
-    <div class="d-md-flex justify-content-between">
-      <div class="grid-margin d-flex justify-content-start">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=vCoUZBhYzHA" target="_blank">
-            <img src="images/pandasaiwithllama3.png" alt="" class="img-icons" height="62px">
-            <h5 class="py-3">How to integrtae Pandas AI with a local LLM using Ollama? Data Analysis using AI</h5>
-            <p class="text-muted">Perform data analysis using LLM | Private & Free | Ollama | AI | llama3 | Python</p>
-            <a href="https://docs.pandas-ai.com/" target="_blank"><p class="readmore-link">PandasAI</p></a>
-            <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/PandasAI" target="_blank"><p class="readmore-link">Repo</p></a>
-          </a>
-        </div>
-      </div>
-
-      <div class="grid-margin d-flex justify-content-center">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=7QI7ZCKvr5w" target="_blank">
-            <img src="images/chatwithdb.png" alt="" class="img-icons" height="62px">
-            <h5 class="py-3">How to integrate NLP & AI with a database? | Get Insights from database using NLP</h5>
-            <p class="text-muted">Integrate LLM in your APP | Build with LLM | Ollama | LangChain | Python</p>
-            <a href="https://js.langchain.com/v0.1/docs/get_started/introduction" target="_blank"><p class="readmore-link">LangChain</p></a>
-            <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/NLP%20%26%20AI%20database%20integration" target="_blank"><p class="readmore-link">Repo</p></a>
-          </a>
-        </div>
-      </div>
-
-      <div class="grid-margin d-flex justify-content-end">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=Ii4ouKEUgz4" target="_blank">
-            <img src="images/ChatwithDocumentusingLLM.png" alt="" class="img-icons" height="62px">
-            <h5 class="py-3">How to build a rag app using ollama and langchain | Get Insights from documents</h5>
-            <p class="text-muted">Unlock the power of AI with a Retrieval-Augmented Generation (RAG) system</p>
-            <a href="https://cloud.google.com/use-cases/retrieval-augmented-generation" target="_blank"><p class="readmore-link">RAG</p></a>
-            <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/RAG%20App" target="_blank"><p class="readmore-link">Repo</p></a>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Row 4 -->
-    <div class="d-md-flex justify-content-between">
-      <div class="grid-margin d-flex justify-content-start">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=mqI3So_8S88" target="_blank">
-            <img src="images/langchain.png" alt="" class="img-icons" height="62px">
-            <h5 class="py-3">What is LangChain? Explore LangChain framework with examples</h5>
-            <p class="text-muted">Learn the basics of LangChain with examples | Ollama | Python</p>
-            <a href="https://www.langchain.com/" target="_blank"><p class="readmore-link">LangChain</p></a>
-            <a href="https://github.com/hnawaz007/AI" target="_blank"><p class="readmore-link">Repo</p></a>
-          </a>
-        </div>
-      </div>
-
-      <div class="grid-margin d-flex justify-content-center">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=Huy-Gn4RtGQ" target="_blank">
-            <img src="images/OCR.png" alt="OCR Icon" class="img-icons" height="62px">
-            <h5 class="py-3">Build an optical character recognition (OCR) system using LLM</h5>
-            <p class="text-muted">OCR with Ollama | Vision LLM | Open Source</p>
-            <a href="https://ollama.com/" target="_blank"><p class="readmore-link">Ollama</p></a>
-          </a>
-        </div>
-      </div>
-
-      <div class="grid-margin d-flex justify-content-end">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=Q8DsK_QNY6g" target="_blank">
-            <img src="images/ai agent sc.png" alt="AI Agent Icon" class="img-icons" height="62px">
-            <h5 class="py-3">How to create your first AI Agent? Using Anthropic Claude Sonnet</h5>
-            <p class="text-muted">AI Agent | LLM | Anthropic | Claude | LangChain</p>
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </section>
-  
-  <!-- Row 5: new entry added to left column -->
-  <section class="features-overview">
-    <div class="d-md-flex justify-content-between">
-      <div class="grid-margin d-flex justify-content-start">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=jWmNgFzYW6g" target="_blank">
-            <img src="images/n8n thumbnail.png" alt="" class="img-icons" height="62px">
-            <h5 class="py-3">Build a Data Analysis AI Agent with n8n and Docker (Step-by-Step Tutorial)</h5>
-            <p class="text-muted">Explore n8n, a powerful open-source workflow automation tool</p>
-          </a>
-        </div>
-      </div>
-
-      <div class="grid-margin d-flex justify-content-center">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=qil5iBwd0IA" target="_blank">
-            <img src="images/Local AI Agent.jpg" alt="n8n Ollama Icon" class="img-icons" height="62px">
-            <h5 class="py-3">How to build a local AI Agent using n8n and Ollama | Open Source | Self-host n8n</h5>
-            <p class="text-muted">Explore n8n, and Ollama powerful open-source workflow automation tools</p>
-          </a>
-        </div>
-      </div>
-
-      <div class="grid-margin d-flex justify-content-end">
-        <div class="features-width">
-          <a href="https://www.youtube.com/watch?v=qcrm1B1Gcn8" target="_blank">
-            <img src="images/whisper ai.jpg" alt="Whisper Icon" class="img-icons" height="62px">
-            <h5 class="py-3">How to convert speech to text using a locall whisper model? AI speech-to-text</h5>
-            <p class="text-muted">set up and using a local Whisper model for speech-to-text transcription.</p>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-<!---------------->
-</div>
-</div>
-<!---------------->
-
- 
+  <script>
+    (function(){
+      var SIZES = ['maxresdefault','sddefault','hqdefault','mqdefault'];
+      function attempt(img, idx){
+        if(idx >= SIZES.length){ showPlaceholder(img); return; }
+        var vid = img.dataset.vid;
+        img.onerror = function(){ attempt(img, idx+1); };
+        img.onload  = function(){ checkGray(img, idx); };
+        img.src = 'https://img.youtube.com/vi/' + vid + '/' + SIZES[idx] + '.jpg';
+      }
+      function checkGray(img, idx){
+        try {
+          var c = document.createElement('canvas');
+          c.width = c.height = 2;
+          var ctx = c.getContext('2d');
+          ctx.drawImage(img, Math.floor(img.naturalWidth*.4), Math.floor(img.naturalHeight*.4), 2, 2, 0, 0, 2, 2);
+          var d = ctx.getImageData(0,0,2,2).data;
+          var gray = true;
+          for(var i=0;i<d.length;i+=4){
+            if(d[i]<120 || Math.abs(d[i]-d[i+1])>18 || Math.abs(d[i]-d[i+2])>18){ gray=false; break; }
+          }
+          if(gray){ attempt(img, idx+1); }
+        } catch(e){ /* CORS blocked */ }
+      }
+      function showPlaceholder(img){
+        img.style.display='none';
+        img.closest('.card-thumb').classList.add('thumb-ph');
+      }
+      document.querySelectorAll('.card-thumb img[data-vid]').forEach(function(img){
+        attempt(img, 0);
+      });
+    })();
+  </script>
 </body>
-
 </html>

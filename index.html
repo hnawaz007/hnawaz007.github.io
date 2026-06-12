@@ -1,474 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>BI Insights page</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/style.min.css">
-</head>
-<body id="body" data-spy="scroll" data-target=".navbar" data-offset="100">
-  <header id="header-section">
-    <nav class="navbar navbar-expand-lg pl-3 pl-sm-0" id="navbar">
-    <div class="container">
-      <div class="navbar-brand-wrapper d-flex w-100">
-         <a class="navbar-brand" href="index.html">BI Insights Inc</a>
-        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="mdi mdi-menu navbar-toggler-icon"></span>
-        </button> 
-      </div>
-      <div class="collapse navbar-collapse navbar-menu-wrapper" id="navbarSupportedContent">
-        <ul class="navbar-nav align-items-lg-center align-items-start ml-auto">
-          <li class="d-flex align-items-center justify-content-between pl-4 pl-lg-0">
-            <div class="navbar-collapse-logo">
-              <img src="images/Group2.svg" alt="">
-            </div>
-            <button class="navbar-toggler close-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="mdi mdi-close navbar-toggler-icon pl-5"></span>
-            </button>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#header-section">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#features-section">About</a>
-          </li>
+  <title>BI Insights Inc — Data Analytics</title>
+  <style>
+    /* ── CSS Variables ───────────────────────────────────────── */
+    :root {
+      --bg:          #0d1117;
+      --card-bg:     #1c2333;
+      --card-border: #2d3748;
+      --accent:      #4f6ef7;
+      --text:        #e2e8f0;
+      --text-muted:  #8892a4;
+      --radius:      12px;
+      --shadow:      0 4px 24px rgba(0,0,0,0.4);
+      --shadow-hover:0 12px 40px rgba(0,0,0,0.6);
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
 
-        </ul>
-      </div>
-    </div> 
-    </nav>   
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ─────────────────────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,17,23,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 24px;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { font-size: 1.1rem; font-weight: 700; }
+    .nav-brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero {
+      max-width: 1280px; margin: 0 auto;
+      padding: 72px 24px 56px; text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p { font-size: 1.05rem; color: var(--text-muted); max-width: 520px; margin: 0 auto 32px; }
+
+    .social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .social-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: 8px; font-size: 0.875rem; font-weight: 600;
+      border: 1px solid transparent;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+    .social-link:hover { transform: translateY(-2px); opacity: 0.9; }
+    .social-link.gh  { background: #21262d; border-color: #3d444d; }
+    .social-link.yt  { background: #2a1414; border-color: #7f1d1d; color: #fca5a5; }
+    .social-link.li  { background: #142038; border-color: #1e3a5f; color: #93c5fd; }
+    .social-link.med { background: #1a1a1a; border-color: #3d3d3d; color: #d1d5db; }
+    .social-link.ig  { background: #2a1a1a; border-color: #7f2d5f; color: #f9a8d4; }
+
+    /* ── Section ─────────────────────────────────────────────── */
+    .section {
+      max-width: 1280px; margin: 0 auto; padding: 0 24px 64px;
+    }
+    .section-head {
+      border-left: 3px solid var(--accent); padding-left: 16px; margin-bottom: 28px;
+    }
+    .section-head h2 { font-size: 1.3rem; font-weight: 700; }
+    .section-head p  { font-size: 0.875rem; color: var(--text-muted); margin-top: 3px; }
+
+    /* ── Topic grid ──────────────────────────────────────────── */
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 960px) { .topic-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) {
+      .topic-grid { grid-template-columns: 1fr; gap: 14px; }
+      .hero { padding: 48px 16px 40px; }
+      .section { padding: 0 16px 48px; }
+      .nav-links { display: none; }
+    }
+
+    /* ── Topic card ──────────────────────────────────────────── */
+    .topic-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex; flex-direction: column; gap: 10px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .topic-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent);
+    }
+
+    .topic-icon {
+      width: 44px; height: 44px; object-fit: contain;
+      filter: brightness(1.1);
+    }
+
+    .topic-title {
+      font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.3;
+    }
+
+    .topic-desc {
+      font-size: 0.85rem; color: var(--text-muted); flex: 1;
+    }
+
+    .topic-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 13px; border-radius: 6px; font-size: 0.78rem; font-weight: 600;
+      border: 1px solid transparent; transition: opacity 0.15s, transform 0.15s;
+    }
+    .btn:hover { opacity: 0.82; transform: translateY(-1px); }
+    .btn-details { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-repo    { background: #1e2a3a; color: #7dd3fc; border-color: #2d4a6a; }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    .footer {
+      text-align: center; padding: 32px 24px;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted); font-size: 0.82rem;
+    }
+    .footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">BI <span>Insights</span> Inc</a>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#topics">Topics</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Data <span>Analytics</span> &amp; Engineering</h1>
+    <p>Projects and tutorials on Data Engineering, Python, SQL, Power BI, and AI — by BI Insights Inc.</p>
+    <div class="social-links">
+      <a href="https://github.com/hnawaz007" target="_blank" class="social-link gh">GitHub</a>
+      <a href="https://www.youtube.com/channel/UC8aox1k3cd00tTKuBNt4tMw" target="_blank" class="social-link yt">YouTube</a>
+      <a href="https://www.linkedin.com/in/haq-nawaz/" target="_blank" class="social-link li">LinkedIn</a>
+      <a href="https://medium.com/@hnawaz100" target="_blank" class="social-link med">Medium</a>
+      <a href="https://www.instagram.com/bi_insights_inc/" target="_blank" class="social-link ig">Instagram</a>
+    </div>
   </header>
-  <div class="banner" >
-    <div class="container">
-      <h1 class="font-weight-semibold">Data Analytics</h1>
-       <h6 class="font-weight-normal text-muted pb-3">This site showcases the projects and Data Anlytics topics covered by BI Insights Inc.</h6>
-	<p>Follow me on</p>
-	<div>
-        <a href="https://github.com/hnawaz007" target="_blank" class="btn btn-opacity-light mr-1">GitHub</a>
-        <a href="https://www.youtube.com/channel/UC8aox1k3cd00tTKuBNt4tMw" target="_blank" class="btn btn-opacity-success mr-1">YouTube</a>
-	<a href="https://www.linkedin.com/in/haq-nawaz/" target="_blank" class="btn btn-opacity-warning mr-1">LinkedIn</a>
-        <a href="https://medium.com/@hnawaz100" target="_blank" class="btn btn-opacity-light ml-1">Medium</a>
-	<a href="https://www.instagram.com/bi_insights_inc/" target="_blank" class="btn btn-opacity-success ml-1">Instagram</a>
+
+  <main id="topics" class="section">
+    <div class="section-head">
+      <h2>All Topics</h2>
+      <p>Click any topic to browse the full video playlist, code, and articles.</p>
+    </div>
+    <div class="topic-grid">
+
+      <div class="topic-card">
+        <img src="images/Group12.svg" alt="" class="topic-icon">
+        <div class="topic-title">ETL Pipeline</div>
+        <div class="topic-desc">Develop Data Integration Pipelines with Python</div>
+        <div class="topic-actions">
+          <a href="etl.html" target="_blank" class="btn btn-details">📄 Details</a>
+          <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/ETL%20Pipeline" target="_blank" class="btn btn-repo">{} Repo</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/Group7.svg" alt="" class="topic-icon">
+        <div class="topic-title">Automate Excel</div>
+        <div class="topic-desc">Automate your Excel reports with Python</div>
+        <div class="topic-actions">
+          <a href="automateexcel.html" target="_blank" class="btn btn-details">📄 Details</a>
+          <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/AutomateExcelReports" target="_blank" class="btn btn-repo">{} Repo</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/Group5.svg" alt="" class="topic-icon">
+        <div class="topic-title">Machine Learning</div>
+        <div class="topic-desc">Machine Learning algorithms: Classification, Regression, and more</div>
+        <div class="topic-actions">
+          <a href="ml.html" target="_blank" class="btn btn-details">📄 Details</a>
+          <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/ML" target="_blank" class="btn btn-repo">{} Repo</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/AWS2.png" alt="" class="topic-icon">
+        <div class="topic-title">AWS Data Engineering</div>
+        <div class="topic-desc">Develop Data Integration Pipelines on AWS</div>
+        <div class="topic-actions">
+          <a href="aws.html" target="_blank" class="btn btn-details">📄 Details</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/airflow.png" alt="" class="topic-icon">
+        <div class="topic-title">Apache Airflow</div>
+        <div class="topic-desc">Learn Airflow: Automate ETL pipelines</div>
+        <div class="topic-actions">
+          <a href="airflow.html" target="_blank" class="btn btn-details">📄 Details</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/MDS.png" alt="" class="topic-icon">
+        <div class="topic-title">Modern Data Stack</div>
+        <div class="topic-desc">Learn new tools for Data Engineering</div>
+        <div class="topic-actions">
+          <a href="mds.html" target="_blank" class="btn btn-details">📄 Details</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/creative.png" alt="" class="topic-icon">
+        <div class="topic-title">Artificial Intelligence</div>
+        <div class="topic-desc">AI series — how to run AI locally and build with AI</div>
+        <div class="topic-actions">
+          <a href="ai.html" target="_blank" class="btn btn-details">📄 Details</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/dagsterclr.png" alt="" class="topic-icon">
+        <div class="topic-title">Dagster</div>
+        <div class="topic-desc">A Python-based data orchestrator</div>
+        <div class="topic-actions">
+          <a href="dagster.html" target="_blank" class="btn btn-details">📄 Details</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/Spark.png" alt="" class="topic-icon">
+        <div class="topic-title">PySpark | Apache Spark</div>
+        <div class="topic-desc">Data Engineering with PySpark</div>
+        <div class="topic-actions">
+          <a href="spark.html" target="_blank" class="btn btn-details">📄 Details</a>
+          <a href="https://github.com/hnawaz007/pythondataanalysis" target="_blank" class="btn btn-repo">{} Repo</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/dq.svg" alt="" class="topic-icon">
+        <div class="topic-title">Data Quality</div>
+        <div class="topic-desc">How to perform Data Quality testing</div>
+        <div class="topic-actions">
+          <a href="dataquality.html" target="_blank" class="btn btn-details">📄 Details</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/Kafka.png" alt="" class="topic-icon">
+        <div class="topic-title">Apache Kafka</div>
+        <div class="topic-desc">Data Streaming with Apache Kafka</div>
+        <div class="topic-actions">
+          <a href="kafka.html" target="_blank" class="btn btn-details">📄 Details</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/DA.svg" alt="" class="topic-icon">
+        <div class="topic-title">Python Data Analysis</div>
+        <div class="topic-desc">Data Analysis with Python</div>
+        <div class="topic-actions">
+          <a href="dataanalysis.html" target="_blank" class="btn btn-details">📄 Details</a>
+          <a href="https://github.com/hnawaz007/PowerBIAdvWorks" target="_blank" class="btn btn-repo">{} Repo</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/streaming4.png" alt="" class="topic-icon">
+        <div class="topic-title">Data Streaming</div>
+        <div class="topic-desc">Data Streaming with Apache Kafka</div>
+        <div class="topic-actions">
+          <a href="streaming.html" target="_blank" class="btn btn-details">📄 Details</a>
+          <a href="https://github.com/hnawaz007/pythondataanalysis" target="_blank" class="btn btn-repo">{} Repo</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/datalake.png" alt="" class="topic-icon">
+        <div class="topic-title">Data Lake &amp; Lakehouse</div>
+        <div class="topic-desc">How to create a Data Lake &amp; Lakehouse on-premise</div>
+        <div class="topic-actions">
+          <a href="datalake.html" target="_blank" class="btn btn-details">📄 Details</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/SQLD.webp" alt="" class="topic-icon">
+        <div class="topic-title">SQL</div>
+        <div class="topic-desc">Learn SQL to query databases</div>
+        <div class="topic-actions">
+          <a href="sql.html" target="_blank" class="btn btn-details">📄 Details</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/SQL.svg" alt="" class="topic-icon">
+        <div class="topic-title">SQL Server</div>
+        <div class="topic-desc">SQL Server databases and services</div>
+        <div class="topic-actions">
+          <a href="sqlserver.html" target="_blank" class="btn btn-details">📄 Details</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/flask3.png" alt="" class="topic-icon">
+        <div class="topic-title">Flask</div>
+        <div class="topic-desc">Learn the Flask web framework with Python</div>
+        <div class="topic-actions">
+          <a href="flask.html" target="_blank" class="btn btn-details">📄 Details</a>
+          <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/Flask" target="_blank" class="btn btn-repo">{} Repo</a>
+        </div>
+      </div>
+
+      <div class="topic-card">
+        <img src="images/PBI.webp" alt="" class="topic-icon">
+        <div class="topic-title">Power BI</div>
+        <div class="topic-desc">Data Analysis and visualization with Power BI</div>
+        <div class="topic-actions">
+          <a href="pbi.html" target="_blank" class="btn btn-details">📄 Details</a>
+          <a href="https://github.com/hnawaz007/PowerBIAdvWorks" target="_blank" class="btn btn-repo">{} Repo</a>
+        </div>
       </div>
 
     </div>
-  </div>
-  <div class="content-wrapper">
-    <div class="container">
-      <section class="features-overview" id="features-section" >
-        <div class="content-header">
-          <img src="images/BIInsightsInc-sm-1.com.png" alt="" class="img-icons img-banner">
-          <h6 class="section-subtitle text-muted">Start your Data and Analytics journey with <a href="https://www.youtube.com/channel/UC8aox1k3cd00tTKuBNt4tMw" target="_blank">BI Insights Inc.</h6>
-        </div>
-        <div class="d-md-flex justify-content-between">
-        <div class="grid-margin d-flex justify-content-start">
-            <div class="features-width">
-			 <a href="etl.html" target="_blank">
-              <img src="images/Group12.svg" alt="" class="img-icons">
-		<h5 class="py-3">ETL Pipeline</h5>
-		<p class="text-muted">Develop Data Integration Pipelines with Python</p>
-              <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/ETL%20Pipeline" target="_blank"><p class="readmore-link">Repo</p></a>  
-	      <a href="etl.html" target="_blank"><p class="readmore-link">Details</p></a>  
-            </div>
-          </div>
-          <div class="grid-margin d-flex justify-content-center">
-            <div class="features-width">
-			<a href="automateexcel.html" target="_blank">
-              <img src="images/Group7.svg" alt="" class="img-icons">
-              <h5 class="py-3">Automate Excel</h5>
-              <p class="text-muted">Automate your Excel reports with Python</p>
-              <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/AutomateExcelReports" target="_blank"><p class="readmore-link">Repo</p></a>
-	      <a href="automateexcel.html" target="_blank"><p class="readmore-link" target="_blank">Details</p></a>
-            </div>
-          </div>
-          <div class="grid-margin d-flex justify-content-end">
-            <div class="features-width">
-			<a href="ml.html" target="_blank">
-              <img src="images/Group5.svg" alt="" class="img-icons">
-              <h5 class="py-3">Machine Learning</h5>
-              <p class="text-muted">Machine Learning algorithms; Classification, Regression ...</p>
-              <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/ML" target="_blank"><p class="readmore-link">Repo</p></a>
-	      <a href="ml.html" target="_blank"><p class="readmore-link">Details</p></a>  
-            </div>
-          </div>
-		</div>
-	</section>     
-		
-  <section class="case-studies" id="case-studies-section">
-        <div class="row grid-margin">
-          <div class="col-12 text-center pb-5">
-            <h2>More Topics</h2>
-            <h6 class="section-subtitle text-muted">Explore other Data related topics</h6>
-          </div>
-          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-primary text-center card-contents">
-                  <div class="card-image">
-                    <img src="images/AWS2.png" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">AWS Data Engineering</h6>
-                      <a href="aws.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                    <h6 class="m-0 pb-1">Develop Data Integration Pipelines on AWS</h6>
-                    <p>GitHub</p>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-warning text-center card-contents">
-                  <div class="card-image">
-                      <img src="images/airflow.png" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">Airflow</h6>
-                      <a href="airflow.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                    <h6 class="m-0 pb-1">Airflow - ETL Orchestrator</h6>
-                    <p>Learn Airflow: Automate ETL</p>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-violet text-center card-contents">
-                  <div class="card-image">
-                      <img src="images/MDS.png" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">Modern Data Stack</h6>
-                      <a href="mds.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                    <h6 class="m-0 pb-1">Modern Data Stack</h6>
-                    <p>Learn new tools for Data Engineering</p>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-          <div class="col-12 col-md-6 col-lg-3 stretch-card" data-aos="zoom-in" data-aos-delay="600">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-success text-center card-contents">
-                  <div class="card-image">
-                      <img src="images/creative.png" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">Artificial Intelligence</h6>
-                      <a href="ai.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                    <h6 class="m-0 pb-1">Learn AI (LLM)</h6>
-                    <p>AI series. How to run AI Locally and build with AI.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-        </div>
-		
-      </section>  
-	  
-<!----------------------------------->
+  </main>
 
-      <section class="case-studies" id="case-studies-section">
-        <div class="row grid-margin">
-		
-          <div class="col-12 col-md-6 col-lg-3 stretch-card" data-aos="zoom-in" data-aos-delay="600">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-success text-center card-contents">
-                  <div class="card-image">
-                      <img src="images/dagsterclr.png" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">Dagster</h6>
-                      <a href="dagster.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                    <h6 class="m-0 pb-1">Learn Dagster</h6>
-                    <p>A python based data orchestrator</p>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-warning text-center card-contents">
-                  <div class="card-image">
-                      <img src="images/Spark.png" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">PySaprk | Apache Spark</h6>
-                      <a href="spark.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                  <h6 class="m-0 pb-1">Data Engineering with PySpark</h6>
-                  <a href="https://github.com/hnawaz007/pythondataanalysis" target="_blank" class="btn btn-white"><p>Learn PySpark</p></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-violet text-center card-contents">
-                  <div class="card-image">
-                      <img src="images/dq.svg" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">Perform Data Quality Test</h6>
-                      <a href="dataquality.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                    <h6 class="m-0 pb-1">Data Quality</h6>
-                    <p>How to perform Data Quality?</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-6 col-lg-3 stretch-card" data-aos="zoom-in" data-aos-delay="600">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-success text-center card-contents">
-                  <div class="card-image">
-                      <img src="images/Kafka.png" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">Apache Kafka</h6>
-                      <a href="kafka.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                    <h6 class="m-0 pb-1">Apache Kafka</h6>
-                    <p>Data Streaming</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-      </section>     
-	  
-<!----------------------------------->
-
-      <section class="case-studies" id="case-studies-section">
-        <div class="row grid-margin">
-          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-primary text-center card-contents">
-                  <div class="card-image">
-                    <img src="images/DA.svg" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">Python Data Analysis</h6>
-                      <a href="dataanalysis.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                    <h6 class="m-0 pb-1">Data Analysis with Python</h6>
-                    <a href="https://github.com/hnawaz007/PowerBIAdvWorks" target="_blank" class="btn btn-white"><p>GitHub</p></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-warning text-center card-contents">
-                  <div class="card-image">
-                      <img src="images/streaming4.png" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">Data Streaming</h6>
-                      <a href="streaming.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                  <h6 class="m-0 pb-1">Data Streaming with Apache Kafka</h6>
-                  <a href="https://github.com/hnawaz007/pythondataanalysis" target="_blank" class="btn btn-white"><p>Learn PySpark</p></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-violet text-center card-contents">
-                  <div class="card-image">
-                      <img src="images/datalake.png" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">On-Premise Data Lake & Lakehouse</h6>
-                      <a href="datalake.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                    <h6 class="m-0 pb-1">Data Lake</h6>
-                    <p>How to create Data Lake & Lakehouse?</p>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-warning text-center card-contents">
-                  <div class="card-image">
-                      <img src="images/SQLD.webp" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">SQL - query database</h6>
-                      <a href="sql.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                    <h6 class="m-0 pb-1">SQL</h6>
-                    <p>Learn SQL</p>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-		  
-        </div>
-
-         
-      </section>    
-	 
-<!----------------------------------->	 
-	 <section class="case-studies" id="case-studies-section">
-        <div class="row grid-margin">
-		<!------->	 
-      <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-primary text-center card-contents">
-                  <div class="card-image">
-                    <img src="images/SQL.svg" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">SQL Server</h6>
-                      <a href="sqlserver.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                   <div class="card-details text-center pt-4">
-                    <h6 class="m-0 pb-1">SQL Server databases</h6>
-                    <p>SQL Server Services</p>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-		  <!------->	 
-		    <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-warning text-center card-contents">
-                  <div class="card-image">
-                      <img src="images/flask3.png" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">Flask</h6>
-                      <a href="flask.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                  <h6 class="m-0 pb-1">Learn Flask Web Framework</h6>
-                  <a href="https://github.com/hnawaz007/pythondataanalysis/tree/main/Flask" target="_blank" class="btn btn-white"><p>Learn Flask</p></a>
-                </div>
-              </div>
-            </div>
-          </div>
-		  	<!------->	 
-			          <div class="col-12 col-md-6 col-lg-3 stretch-card mb-3 mb-lg-0" data-aos="zoom-in">
-            <div class="card color-cards">
-              <div class="card-body p-0">
-                <div class="bg-primary text-center card-contents">
-                  <div class="card-image">
-                    <img src="images/PBI.webp" class="case-studies-card-img" alt="">
-                  </div>  
-                  <div class="card-desc-box d-flex align-items-center justify-content-around">
-                    <div>
-                      <h6 class="text-white pb-2 px-3">Power BI</h6>
-                      <a href="pbi.html" target="_blank" class="btn btn-white">Details</a>
-                    </div>
-                  </div>
-                </div>   
-                <div class="card-details text-center pt-4">
-                    <h6 class="m-0 pb-1">Data Analysis with Power BI</h6>
-                    <a href="https://github.com/hnawaz007/PowerBIAdvWorks" target="_blank" class="btn btn-white"><p>GitHub</p></a>
-                </div>
-              </div>
-            </div>
-          </div>
-		  	  	<!------->	 
-        </div>
-        </div>
-      </section>    
-<!----------------------------------->
-
-      <!-- Footer below  -->	  
-	  
-      <footer class="border-top">
-        <p class="text-center text-muted pt-4">Copyright © 2019<a href="https://hnawaz007.github.io/" class="px-1">BI Insights Inc.</a>All rights reserved.</p>
-      </footer>
-      <!-- Modal for Contact - us Button -->
-
-    </div> 
-  </div>
-
+  <footer class="footer">
+    <p>© 2019 <a href="https://hnawaz007.github.io/">BI Insights Inc.</a> All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
